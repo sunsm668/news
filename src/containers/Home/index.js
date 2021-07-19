@@ -1,24 +1,23 @@
 import  React,{ Component } from "react";
-import { List } from 'antd';
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { List } from 'antd';
 
-class list extends Component{
+class Home extends Component{
     constructor( props) {
         super( props);
         this.state = {
             data : []
         }
     }
-    componentWillReceiveProps( nextProps){
+    // 切换菜单项，获取数据
+    componentWillReceiveProps( nextProps ){
         const id = this.props.match.params.id;
-        // let url = 'https://www.fastmock.site/mock/a660319589c1010a2775705c6620a93c/news/api/list';
         let url = 'http://www.dell-lee.com/react/api/list.json';
-        if( id  ){
-            url = url + '?id=' + id;
+        if( id ){
+            url = `${url}?id=${id}`;
         }
-        axios.get(url)
-        .then(res => {
+        axios.get(url).then(res => {
             this.setState({
                 list : res.data.data
             })
@@ -40,19 +39,19 @@ class list extends Component{
           />
         ) 
     }
+
+    // 页面挂载时获取数据
     componentDidMount(){
         const id = this.props.match.params.id;
-        // let url = 'https://www.fastmock.site/mock/a660319589c1010a2775705c6620a93c/news/api/list';
         let url = 'http://www.dell-lee.com/react/api/list.json';
-        if( id  ){
-            url = url + '?id=' + id;
+        if( id ){
+            url = `${url}?id=${id}`;
         }
-        axios.get(url)
-        .then(res => {
+        axios.get(url).then(res => {
             this.setState({
                 list : res.data.data
             })
         })
     }
 }
-export default list;
+export default Home;

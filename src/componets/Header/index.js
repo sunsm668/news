@@ -1,12 +1,12 @@
 import React , { Component, Fragment }from "react";
-import logo from "./logo.png";
-import "./index.css";
-import { Menu , Icon } from 'antd';
-import axios from "axios";
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+// 引入 antd 组件
+import { Menu , Icon } from 'antd';
 
-
+import logo from "./logo.png";
+import "./index.css";
 
 
 class AppHeader extends Component {
@@ -16,6 +16,8 @@ class AppHeader extends Component {
             list : []
         }
     }
+
+    // 处理数据，返回菜单
     getMenuItems(){
         return this.state.list.map( item => {
             return(
@@ -29,11 +31,10 @@ class AppHeader extends Component {
         })
   
     }
+
+    // 获取数据
     componentDidMount(){
-        // axios.get("http://www.dell-lee.com/react/api/header.json")
-        // const id = this.props.match.params.id;
- 
-        axios.get('https://www.fastmock.site/mock/a660319589c1010a2775705c6620a93c/news/api/header')
+        axios.get('http://www.dell-lee.com/react/api/header.json')
         .then((res) => {
             this.setState(
                 { list : res.data.data }
@@ -43,17 +44,18 @@ class AppHeader extends Component {
     render(){
         return(
             <Fragment>
+                {/* 点击 logo 跳转至首页 */}
                 <Link to = '/'>
                     <img src = { logo } className = "App-Header-logo" alt = "logo"></img>
                 </Link>
-                <Menu 
-                mode = "horizontal"
-                className = "App-Header-menu"
-                >
+                {/* 菜单 */}
+                <Menu mode = "horizontal" className = "App-Header-menu">
                    { this.getMenuItems() }
                 </Menu>
             </Fragment>
         )
     }
 }
+
+// 导出组件
 export default AppHeader;

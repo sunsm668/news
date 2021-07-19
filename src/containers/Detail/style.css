@@ -1,4 +1,5 @@
 .detail img{
+    /* 文字环绕效果 */
     float: left;
     margin-right: 10px;
 }
